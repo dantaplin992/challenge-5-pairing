@@ -29,14 +29,15 @@ class DiaryEntry
                                   # of words the user can read per minute
                                   # `minutes` is an integer representing the
                                   # number of minutes the user has to read
-    # Returns a string with a chunk of the contents that the user could read
-    # in the given number of minutes.
+   
     # If called again, `reading_chunk` should return the next chunk, skipping
     # what has already been read, until the contents is fully read.
     # The next call after that it should restart from the beginning.
 
     words = @contents.split(" ")
     how_many_words = wpm * minutes
-    return words[0..how_many_words].join(" ")
+    words_to_read = words[0..how_many_words].join(" ")
+    @contents.delete(words_to_read)
+    return words_to_read
   end
 end

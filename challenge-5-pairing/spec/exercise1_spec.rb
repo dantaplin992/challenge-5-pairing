@@ -22,8 +22,14 @@ RSpec.describe DiaryEntry do
     expect(diary_entry.reading_time(3)).to eq 1
   end
 
-  it 'returns a stirng with contents user can read in given minutes' do
+  it 'returns a string with contents user can read in given minutes' do
     diary_entry = DiaryEntry.new("Monday Morning", "Feeling tired need sleep")
     expect(diary_entry.reading_chunk(2, 2)).to eq "Feeling tired need sleep"
+  end
+
+  it 'returns the next readable string if reading chunk is called again' do
+    diary_entry = DiaryEntry.new("Monday Morning", "Feeling tired need sleep")
+    diary_entry.reading_chunk(2, 1)
+    expect(diary_entry.reading_chunk(2, 1)).to eq "need sleep"
   end
 end
