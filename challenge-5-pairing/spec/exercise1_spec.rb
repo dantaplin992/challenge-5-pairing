@@ -32,4 +32,11 @@ RSpec.describe DiaryEntry do
     diary_entry.reading_chunk(2, 1)
     expect(diary_entry.reading_chunk(2, 1)).to eq "need sleep"
   end
+
+  it 'restarts if whole text is read' do
+    diary_entry = DiaryEntry.new("Monday Morning", "Feeling tired need sleep")
+    diary_entry.reading_chunk(2, 1)
+    diary_entry.reading_chunk(2, 1)
+    expect(diary_entry.reading_chunk(2, 1)).to eq "Feeling tired"
+  end
 end
